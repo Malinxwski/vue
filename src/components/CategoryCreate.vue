@@ -7,66 +7,79 @@
 
             <form @submit.prevent="submitHandler">
                 <div class="input-field">
-                    <input id="name" type="text" v-model="title" :class="{invalid:$v.title.$dirty && !$v.title.required}">
+                    <input
+                            id="name"
+                            type="text"
+                            v-model="title"
+                            :class="{invalid: $v.title.$dirty && !$v.title.required}"
+                    >
                     <label for="name">Название</label>
-                    <span class="helper-text invalid"
-                          v-if="$v.title.$dirty && !$v.title.required"
-
-                    >Введите название категории</span>
+                    <span
+                            v-if="$v.title.$dirty && !$v.title.required"
+                            class="helper-text invalid"
+                    >
+            Введите название категории
+          </span>
                 </div>
 
                 <div class="input-field">
-                    <input id="limit" type="number" v-model.number="limit" :class="{invalid:$v.limit.$dirty && !$v.limit.minValue}">
+                    <input
+                            id="limit"
+                            type="number"
+                            v-model.number="limit"
+                            :class="{invalid: $v.limit.$dirty && !$v.limit.minValue}"
+                    >
                     <label for="limit">Лимит</label>
-                    <span class="helper-text invalid"
-                          v-if="$v.limit.$dirty && !$v.limit.minValue"
-                    >Минимальная величина {{$v.limit.$params.minValue.min}}</span>
+                    <span
+                            v-if="$v.limit.$dirty && !$v.limit.minValue"
+                            class="helper-text invalid"
+                    >
+            Минимальная значение {{$v.limit.$params.minValue.min}}
+          </span>
                 </div>
 
-                <button class="btn waves-effect waves-light" type="submit" >
+                <button class="btn waves-effect waves-light" type="submit">
                     Создать
                     <i class="material-icons right">send</i>
                 </button>
             </form>
         </div>
     </div>
-
 </template>
 
 <script>
     import {required, minValue} from 'vuelidate/lib/validators'
+
     export default {
-        data:() => ({
+        data: () => ({
             title: '',
-            limit: 1
+            limit: 100
         }),
-        validations:{
+        validations: {
             title: {required},
-            limit: {minValue:minValue(100)}
+            limit: {minValue: minValue(100)}
         },
         mounted() {
             M.updateTextFields()
         },
-        methods:{
-             async submitHandler(){
-                if(this.$v.$invalid){
+        methods: {
+            async submitHandler() {
+                if (this.$v.$invalid) {
                     this.$v.$touch()
                     return
                 }
 
                 try {
-                    const category = await this.$store.dispatch('createCategory',{
+                    const category = await this.$store.dispatch('createCategory', {
                         title: this.title,
                         limit: this.limit
                     })
                     this.title = ''
                     this.limit = 100
                     this.$v.$reset()
-                    this.$message('Kатегория создана успешно')
-                    this.$emit('createdCategory',category)
-                }catch (e) {}
-
-
+                    this.$message('Категория была создана')
+                    this.$emit('created', category)
+                } catch (e) {}
             }
         }
     }
