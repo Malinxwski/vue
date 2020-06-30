@@ -63,7 +63,7 @@
         mounted() {
 
             this.interval = setInterval(()=> {
-                this.date = new Date()
+                this.date = new Date
             }, 1000)
             window.M.Dropdown.init(this.$refs.dropdown, {
                 constrainWidth: true

@@ -4,6 +4,8 @@ import Vuex from 'vuex'
 import auth from './auth'
 import info from './information'
 import category from './category'
+import record from './record'
+
 
 Vue.use(Vuex)
 
@@ -25,14 +27,12 @@ export default new Vuex.Store({
 
             const res = await fetch(`http://data.fixer.io/api/latest?access_key=${key}&symbols=USD,EUR,BYN`)
             return  await res.json()
-
-
         },
     },
     getters: {
         error: s => s.error
     },
     modules: {
-        auth, info, category
+        auth, info, category, record
     }
 })

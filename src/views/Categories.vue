@@ -62,7 +62,7 @@
                 const idx = this.categories.findIndex(c => c.id === categoryData.id)
                 this.categories[idx].title = null
                 this.categories[idx].limit = null
-                delete this.categories.idx
+
 
                 this.updateCount++
                 this.deleteCount++
