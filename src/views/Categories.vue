@@ -16,6 +16,13 @@
                 />
                 <p v-else class="center">Категорий пока нет</p>
             </div>
+
+            <CategoryDelete
+                    v-if="categories.length"
+                    :categories="categories"
+                    :key="categories.length + deleteCount"
+                    @deleted="deleteCategories"
+            />
         </section>
     </div>
 </template>
@@ -23,20 +30,23 @@
 <script>
     import CategoryCreate from '../components/CategoryCreate'
     import CategoryEdit from '../components/CategoryUpdate'
+    import CategoryDelete from "../components/CategoryDelete";
 
     export default {
         name: 'categories',
         data: () => ({
             categories: [],
             loading: true,
-            updateCount: 0
+            updateCount: 0,
+            deleteCount:10
+
         }),
         async mounted() {
             this.categories = await this.$store.dispatch('fetchCategories')
             this.loading = false
         },
         components: {
-            CategoryCreate, CategoryEdit
+            CategoryCreate, CategoryEdit, CategoryDelete
         },
         methods: {
             addNewCategory(category) {
@@ -47,6 +57,22 @@
                 this.categories[idx].title = category.title
                 this.categories[idx].limit = category.limit
                 this.updateCount++
+            },
+            deleteCategories(categoryData){
+                const idx = this.categories.findIndex(c => c.id === categoryData.id)
+                this.categories[idx].title = null
+                this.categories[idx].limit = null
+                delete this.categories.idx
+
+                this.updateCount++
+                this.deleteCount++
+
+                this.select = M.FormSelect.init(this.$refs.select)
+                M.updateTextFields()
+
+
+
+
             }
         }
     }
