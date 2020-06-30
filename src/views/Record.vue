@@ -153,7 +153,7 @@
                             date: new Date().toJSON()
                         }
                         await this.$store.dispatch('addRecord', formData)
-                        this.$message('Запись добавлена успешно')
+
 
                         const bill = this.type === 'income'
                             ? this.info.bill + this.amount
