@@ -1,7 +1,8 @@
 <template>
-    <ul class="sidenav app-sidenav " :class="{open: value}">
+    <ul class="sidenav app-sidenav text-white" :class="{open: value}">
 
         <router-link
+
             v-for="link in links"
             :key="link.url"
             tag="li"
@@ -10,7 +11,7 @@
             :exact="link.exact"
 
         >
-            <a href="#" class="waves-effect waves-orange pointer">{{link.title}}</a>
+            <a href="#" class="  waves-effect waves-grey pointer">{{link.title}}</a>
         </router-link>
 
     </ul>

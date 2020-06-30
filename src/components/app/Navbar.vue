@@ -1,19 +1,19 @@
 <template>
-    <nav class="navbar orange lighten-1">
+    <nav class="navbar grey darken-4">
         <div class="nav-wrapper">
             <div class="navbar-left">
                 <a href="#"
                    @click.prevent="$emit('toggle')"
                 >
-                    <i class="material-icons black-text">dehaze</i>
+                    <i class="material-icons text-lighten-1">dehaze</i>
                 </a>
-                <span class="black-text">{{date | date('datetime') }}</span>
+                <span class="text-lighten-1">{{date | date('datetime') }}</span>
             </div>
 
             <ul class="right hide-on-small-and-down">
                 <li>
                     <a
-                            class="dropdown-trigger black-text"
+                            class="dropdown-trigger text-lighten-1"
                             href="#"
                             data-target="dropdown"
                             ref="dropdown"
@@ -42,7 +42,6 @@
 </template>
 
 <script>
-
     export default {
         data:()=>({
             date: Date(),
