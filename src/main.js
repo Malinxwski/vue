@@ -10,6 +10,8 @@ import messagePlugin from './utils/message.plugin'
 import Loader from './components/app/Loader'
 import 'materialize-css/dist/js/materialize.min'
 import tooltipDirective from './directives/tooltip.directive'
+import Paginate from 'vuejs-paginate'
+import VueMeta from 'vue-meta'
 
 import firebase from 'firebase/app'
 import 'firebase/auth'
@@ -18,6 +20,8 @@ import 'firebase/database'
 
 Vue.use(messagePlugin)
 Vue.use(Vuelidate)
+Vue.use(VueMeta)
+Vue.component('Paginate', Paginate)
 Vue.component('Loader', Loader)
 Vue.directive('tooltip', tooltipDirective)
 Vue.filter('date',dateFilter)
@@ -33,7 +37,10 @@ const firebaseConfig = {
   messagingSenderId: "1019284439358",
   appId: "1:1019284439358:web:c02332ae5ebb3adfd3ac6f",
   measurementId: "G-JWXE0KELWY"
-};
+}
+
+
+
 
 firebase.initializeApp(firebaseConfig)
 
@@ -49,4 +56,3 @@ firebase.auth().onAuthStateChanged(()=>{
     }).$mount('#app')
   }
 })
-

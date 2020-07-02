@@ -89,7 +89,9 @@
     import { mapGetters } from 'vuex'
 
     export default {
-
+        metaInfo:{
+            title: 'Запись'
+        },
         data:()=>({
             categories:[],
             select: null,

@@ -15,14 +15,17 @@
                         @updated="updateCategories"
                 />
                 <p v-else class="center">Категорий пока нет</p>
+                <div class="row">
+                    <CategoryDelete
+                            v-if="categories.length"
+                            :categories="categories"
+                            :key="categories.length + deleteCount"
+                            @deleted="deleteCategories"
+                    />
+                </div>
             </div>
 
-            <CategoryDelete
-                    v-if="categories.length"
-                    :categories="categories"
-                    :key="categories.length + deleteCount"
-                    @deleted="deleteCategories"
-            />
+
         </section>
     </div>
 </template>
@@ -34,6 +37,9 @@
 
     export default {
         name: 'categories',
+        metaInfo:{
+            title: 'Категории'
+        },
         data: () => ({
             categories: [],
             loading: true,

@@ -23,9 +23,9 @@ export default new Vuex.Store({
     },
     actions:{
         async fetchCurrency(){
-            const key = process.env.VUE_APP_FIXER
+            const key = process.env.VUE_APP_CURR
 
-            const res = await fetch(`http://data.fixer.io/api/latest?access_key=${key}&symbols=USD,EUR,BYN`)
+            const res = await fetch(`https://currate.ru/api/?get=rates&pairs=EURBYN,EURUSD&key=${key}`)
             return  await res.json()
         },
     },

@@ -1,7 +1,7 @@
 <template>
     <form class="card auth-card" @submit.prevent="submitHandler">
         <div class="card-content">
-            <span class="card-title">Домашняя бухгалтерия</span>
+            <span class="card-title">Home CRM</span>
 
 <!--  EMAIL-->
             <div class="input-field">
@@ -101,7 +101,9 @@
 <script>
     import {email, required, minLength } from 'vuelidate/lib/validators'
     export default {
-
+        metaInfo:{
+            title: 'Регистрация'
+        },
         name: 'register',
         data: () => ({
             email:'',

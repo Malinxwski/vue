@@ -30,6 +30,9 @@
 
     export default {
         name: 'Home',
+        metaInfo:{
+          title: 'Главная'
+        },
         data:()=>({
             loading: true,
             currency: null

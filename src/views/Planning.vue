@@ -35,6 +35,9 @@
     export default {
 
         name: 'planning',
+        metaInfo:{
+            title: 'Планирование'
+        },
         data:()=>({
             loading: true,
             categories:[],

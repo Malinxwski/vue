@@ -1,5 +1,5 @@
 <template>
-    <ul class="sidenav app-sidenav text-white" :class="{open: value}">
+    <ul class="sidenav app-sidenav white-text" :class="{open: value}">
 
         <router-link
 
@@ -11,7 +11,7 @@
             :exact="link.exact"
 
         >
-            <a href="#" class="  waves-effect waves-grey pointer">{{link.title}}</a>
+            <a href="#" class=" white-text waves-effect waves-grey pointer">{{link.title}}</a>
         </router-link>
 
     </ul>

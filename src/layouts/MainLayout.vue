@@ -1,14 +1,14 @@
 <template>
-    <div>
+    <div >
         <Loader v-if="loading" />
-        <div class="app-main-layout grey lighten-4 " v-else>
+        <div class="app-main-layout grey lighten-2 " v-else>
 
             <Navbar  @toggle="isOpen = !isOpen" />
 
-            <Sidebar class=" teal lighten-2 " v-model="isOpen" />
+            <Sidebar class=" teal darken-2 " v-model="isOpen" />
 
-            <main class="app-content " :class="{full: !isOpen}">
-                <div class="app-page ">
+            <main class="app-content  " :class="{full: !isOpen}">
+                <div class="app-page  ">
                     <router-view />
                 </div>
             </main>
@@ -24,10 +24,15 @@
         </div>
     </div>
 </template>
+<style scoped lang="css">
+
+
+</style>
 
 <script>
     import Navbar from '../components/app/Navbar'
     import Sidebar from '../components/app/Sidebar'
+    import messages from "../utils/messages";
 
     export default {
         name: 'main-layout',
@@ -44,6 +49,17 @@
         },
         components: {
             Navbar, Sidebar
+        },
+        computed: {
+            error() {
+                return this.$store.getters.error
+            }
+        },
+
+        watch: {
+            error(fbError) {
+                this.$error(messages[fbError.code] || 'Что-то пошло не так')
+            }
         }
     }
 </script>
