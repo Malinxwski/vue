@@ -23,10 +23,10 @@ export default new Vuex.Store({
     },
     actions:{
         async fetchCurrency(){
-            const key = process.env.VUE_APP_CURR
 
-            const res = await fetch(`https://currate.ru/api/?get=rates&pairs=EURBYN,EURUSD&key=${key}`)
-            return  await res.json()
+                const cur = (await fetch(`https://www.nbrb.by/api/exrates/rates?periodicity=0`))
+                return await cur.json()
+
         },
     },
     getters: {

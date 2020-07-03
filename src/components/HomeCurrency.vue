@@ -15,11 +15,10 @@
                     </thead>
 
                     <tbody >
-                    <tr v-for="cur of currencies"
-                        :key="cur">
-                        <td>{{cur}}</td>
-                        <td>{{rates[cur].toFixed(4)}}</td>
-                        <td>{{date | date('date')}}</td>
+                    <tr v-for="c of rates" :key="rates.Cur_ID">
+                        <td>{{c.Cur_Scale}} {{c.Cur_Name}}</td>
+                        <td>{{c.Cur_OfficialRate}}</td>
+                        <td>{{c.Date| date('date')}}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -29,22 +28,16 @@
 </template>
 <script>
     export default {
-        props:['rates', 'date'],
+        props:['rates','date'],
         data:() => ({
-            currencies:['BYN', 'USD', 'EUR'],
+            curVal:0
+
         }),
         computed:{
             base(){
-                return this.$store.getters.info.bill / (this.rates['BYN']/this.rates['EUR'])
+                return this.$store.getters.info.bill
             }
-        },
-        getCurrency(currency){
-            return Math.floor(this.base * this.rates[currency])
         }
 
-
     }
-
-
-
 </script>

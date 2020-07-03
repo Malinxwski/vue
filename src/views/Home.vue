@@ -13,11 +13,12 @@
     <div class="row" v-else>
 
       <HomeBill
-        :rates="currency.rates"
+              :rates="currency"
+
       />
       <HomeCurrency
-        :rates="currency.rates"
-        :date="currency.date"
+              :rates="currency"
+
       />
 
     </div>
@@ -35,21 +36,37 @@
         },
         data:()=>({
             loading: true,
-            currency: null
+            currency: null,
+            currencies:['EUR','USD','RUB']
         }),
         methods:{
            async reload(){
                this.loading = true
-               this.currency =  await this.$store.dispatch('fetchCurrency')
+               const rates = await this.$store.dispatch('fetchCurrency')
+               this.curFilter(rates)
                this.loading = false
+            },
+            curFilter(rates){
 
+                this.currency = rates.filter(cur =>
+                    cur.Cur_Abbreviation === 'USD'
+                    || cur.Cur_Abbreviation === 'EUR'
+                    || cur.Cur_Abbreviation === 'RUB'
+                )
 
             }
         },
         async mounted() {
-            this.currency =  await this.$store.dispatch('fetchCurrency')
+           const rates =  await this.$store.dispatch('fetchCurrency')
+            this.curFilter(rates)
             this.loading = false
+
+
+
+
+
         },
+
         components:{
             HomeBill, HomeCurrency
         }

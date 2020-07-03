@@ -2,14 +2,15 @@
     <div class="col s12 m6 l4">
         <div class="card light-blue bill-card">
             <div class="card-content white-text">
-                <span class="card-title">Счет в валюте</span>
+                <span class="card-title">Счет в валюте </span>
 
-                <p class="currency-line"
-                   v-for="cur of currencies"
-                   :key="cur"
-                >
 
-                    <span>{{getCurrency(cur) | currency(cur)}}</span>
+                <p class="currency-line" v-for="c of rates" :key="rates.Cur_ID">
+
+                    <span>{{(Bill/c.Cur_OfficialRate*c.Cur_Scale).toFixed(4) }} {{c.Cur_Abbreviation}}</span>
+
+
+
                 </p>
             </div>
         </div>
@@ -18,21 +19,19 @@
 <script>
     export default {
         props:['rates'],
-        data: ()=>({
-           currencies:['BYN', 'USD', 'EUR']
+        data:()=>({
+            Bill: 0
         }),
         computed:{
-            base(){
-                return this.$store.getters.info.bill / (this.rates['BYN']/this.rates['EUR'])
-            }
+
         },
-        methods:{
-            getCurrency(currency){
-               return Math.floor(this.base * this.rates[currency])
-            }
+        mounted() {
+            this.Bill = this.$store.getters.info.bill
+            console.log(this.Bill)
 
-        }
 
+
+        },
 
     }
 </script>
